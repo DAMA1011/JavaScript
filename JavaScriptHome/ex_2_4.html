@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ex.2-4</title>
+    <script>
+        for (var i = 100; i < 1000; i++) {
+            var fir = parseInt(i / 100);
+            var sec = parseInt((i % 100) / 10);
+            var thi = parseInt(i % 10);
+            if (fir ** 3 + sec ** 3 + thi ** 3 == i) {
+                document.write(i + " ");
+            }
+        }
+    </script>
+</head>
+
+<body>
+
+</body>
+
+</html>

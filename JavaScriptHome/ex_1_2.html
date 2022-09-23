@@ -8,7 +8,7 @@
     <title>ex.1-2</title>
     <script>
         // 寫一函數檢查身分證號碼是否正確
-        let ID = "A234567890";
+        let ID = "a123456789";
 
         let IDtoUpper = ID.toUpperCase();
         let checkID = function (ID) {
@@ -28,7 +28,24 @@
                         if (third) {
                             document.write("後 8 碼輸入錯誤");
                         } else {
-
+                            let ChangeToNum = ["10", "11", "12", "13", "14", "15", "16", "17", "34", "18", "19", "20", "21", "22", "35", "23", "24", "25", "26", "27", "28", "29", "32", "30", "31", "33"]
+                            // document.write(ChangeToNum[Eng.indexOf(IDtoUpper[0])]);
+                            let CheckNumArr = [];
+                            CheckNumArr.push(ChangeToNum[Eng.indexOf(IDtoUpper[0])][0])
+                            CheckNumArr.push(ChangeToNum[Eng.indexOf(IDtoUpper[0])][1])
+                            // document.write(typeof (ID.substring(2)));
+                            for (let i = 0; i < ID.substring(1).length - 1; i++) {
+                                CheckNumArr.push(ID.substring(1)[i]);
+                            }
+                            // document.write(CheckNumArr[1] + "<br>");
+                            let CheckNumArrFirst = CheckNumArr[0] * 1;
+                            // document.write(CheckNumArrFirst);
+                            // let CheckNumArrSecond = 0;
+                            let CheckNumArrSecond = 0;
+                            for (let count = 9; count >= 1; count--) {
+                                CheckNumArrSecond = count * CheckNumArr[1];
+                            }
+                            document.write(CheckNumArrFirst + CheckNumArrSecond);
                         }
                     }
                 }
@@ -36,7 +53,6 @@
             return "";
         }
         document.write(checkID(ID));
-
     </script>
 </head>
 

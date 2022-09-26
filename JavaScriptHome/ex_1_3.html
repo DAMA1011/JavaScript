@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ex.1-3</title>
+    <style>
+        #changeimg {
+            width: 750px;
+            height: 645px;
+            margin: 20px;
+            overflow: hidden;
+            position: relative;
+            border: solid 5px #ccc;
+        }
+
+        #changeimg img {
+            width: 750px;
+        }
+
+        #changeimg a {
+            color: #6A6AFF;
+            padding: 3px;
+            bottom: 7px;
+            display: block;
+            font-weight: bold;
+            position: absolute;
+            text-decoration: none;
+            border: solid 1px #ccc;
+            background-color: #ECECFF;
+        }
+
+        .c1 {
+            right: 87px;
+        }
+
+        .c2 {
+            right: 67px;
+        }
+
+        .c3 {
+            right: 47px;
+        }
+
+        .c4 {
+            right: 27px;
+        }
+
+        .c5 {
+            right: 7px;
+        }
+    </style>
+</head>
+
+<!-- 圖片輪播 -->
+
+<body onload="show()">
+    <!-- 製作圖片選取按鈕-->
+    <div id="changeimg">
+        <img id="myImg">
+        <a href="#changeimg" class="c1" onclick="showImg(0)">1</a>
+        <a href="#changeimg" class="c2" onclick="showImg(1)">2</a>
+        <a href="#changeimg" class="c3" onclick="showImg(2)">3</a>
+        <a href="#changeimg" class="c4" onclick="showImg(3)">4</a>
+        <a href="#changeimg" class="c5" onclick="showImg(4)">5</a>
+    </div>
+
+    <script>
+        var i = 0, imgArr = new Array();
+        imgArr[0] = "Images/10211_5.jpg";
+        imgArr[1] = "Images/OIP (1).jpeg";
+        imgArr[2] = "Images/OIP.jpeg";
+        imgArr[3] = "Images/R.jpeg";
+        imgArr[4] = "Images/vbKUXqEl.jpg";
+        function showImg(imgNum) {
+            if (imgNum >= 0) i = imgNum;
+            document.getElementById('myImg').src = imgArr[i];
+            i = (i + 1) % 5;
+        }
+        function show() {
+            setInterval(showImg, 1000);
+        }
+    </script>
+</body>
+
+</html>

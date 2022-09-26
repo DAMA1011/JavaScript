@@ -8,49 +8,53 @@
     <title>ex.1-2</title>
     <script>
         // 寫一函數檢查身分證號碼是否正確
-        let ID = "a123456789";
+        let ID = "A123456789";
 
         let IDtoUpper = ID.toUpperCase();
         let checkID = function (ID) {
+            // 檢查字號長度是否符合 10 位字元
             if (ID.length != 10) {
-                document.write("無效的身份證字號");
-            } else {
-                let Eng = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-                let first = Eng.indexOf(IDtoUpper[0]);
-                if (first == -1) {
-                    document.write("第 1 碼輸入錯誤");
-                } else {
-                    let second = ID[1];
-                    if (second != 1 && second != 2) {
-                        document.write("第 2 碼輸入錯誤");
-                    } else {
-                        let third = isNaN(ID.substring(2));
-                        if (third) {
-                            document.write("後 8 碼輸入錯誤");
-                        } else {
-                            let ChangeToNum = ["10", "11", "12", "13", "14", "15", "16", "17", "34", "18", "19", "20", "21", "22", "35", "23", "24", "25", "26", "27", "28", "29", "32", "30", "31", "33"]
-                            // document.write(ChangeToNum[Eng.indexOf(IDtoUpper[0])]);
-                            let CheckNumArr = [];
-                            CheckNumArr.push(ChangeToNum[Eng.indexOf(IDtoUpper[0])][0])
-                            CheckNumArr.push(ChangeToNum[Eng.indexOf(IDtoUpper[0])][1])
-                            // document.write(typeof (ID.substring(2)));
-                            for (let i = 0; i < ID.substring(1).length - 1; i++) {
-                                CheckNumArr.push(ID.substring(1)[i]);
-                            }
-                            // document.write(CheckNumArr[1] + "<br>");
-                            let CheckNumArrFirst = CheckNumArr[0] * 1;
-                            // document.write(CheckNumArrFirst);
-                            // let CheckNumArrSecond = 0;
-                            let CheckNumArrSecond = 0;
-                            for (let count = 9; count >= 1; count--) {
-                                CheckNumArrSecond = count * CheckNumArr[1];
-                            }
-                            document.write(CheckNumArrFirst + CheckNumArrSecond);
-                        }
-                    }
-                }
+                return "請重新輸入";
             }
-            return "";
+
+            // 檢查第一碼是否為英文字
+            let Eng = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+            let first = Eng.indexOf(IDtoUpper[0]);
+            if (first == -1) {
+                return "第 1 碼輸入錯誤";
+            }
+
+            // 檢查第二碼是否為 1 或 2
+            let second = ID[1];
+            if (second != 1 && second != 2) {
+                return "第 2 碼輸入錯誤";
+            }
+
+            // 檢查後八碼是否全部為數字(英文 E,e 會造成科學記號誤判，需另外寫驗證避免)
+            let third = isNaN(ID.substring(2));
+            if (third) {
+                return "後 8 碼輸入錯誤";
+            }
+
+            // 檢查最後一碼檢查碼是否正確
+            let ChangeToNum = ["10", "11", "12", "13", "14", "15", "16", "17", "34", "18", "19", "20", "21", "22", "35", "23", "24", "25", "26", "27", "28", "29", "32", "30", "31", "33"]
+            let CheckNumArr = []; // 建立空陣列塞入所有要被承的數
+            CheckNumArr.push(ChangeToNum[Eng.indexOf(IDtoUpper[0])][0]) // 塞入由英文字轉換而成的數字
+            CheckNumArr.push(ChangeToNum[Eng.indexOf(IDtoUpper[0])][1])
+            for (let i = 0; i < ID.substring(1).length - 1; i++) { // 塞入英文字之後的八碼
+                CheckNumArr.push(ID.substring(1)[i]);
+            }
+            let CheckNumArrFirst = CheckNumArr[0] * 1; // 將塞完值的陣列內容開始承上數字
+            let CheckNumArrSecond = 0;
+            for (let count = 9; count >= 1; count--) {
+                CheckNumArrSecond += (count * CheckNumArr[10 - count]);
+            }
+            let num = (CheckNumArrFirst + CheckNumArrSecond) % 10; // 由兩個變數去接承完數字的值，並進行加總及後續判讀
+            if ((10 - num) != ID[9]) {
+                return "無效的身份證字號";
+            } else {
+                return "身份證字號正確";
+            }
         }
         document.write(checkID(ID));
     </script>

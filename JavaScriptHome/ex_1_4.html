@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ex.1-4</title>
+</head>
+
+<body>
+    <form>
+        <div>
+            <label for="username">會員名稱</label>
+            <input type="text" name="username">
+        </div>
+        <div>
+            <label for="gender">性別</label>
+            <input type="radio" name="gender" value="male">男
+            <input type="radio" name="gender" value="female">女
+        </div>
+        <div>
+            <label for="birthday">生日</label>
+            <input type="number" name="birthday">
+            <select name="birthday" id="month"></select>
+            <select name="birthday" id="date"></select>
+        </div>
+    </form>
+
+    <script>
+        var mon;
+        for (mon = 1; mon <= 12; mon++) {
+            mon = mon + "<br>";
+        }
+        document.getElementById("month").innerHTML = mon;
+    </script>
+</body>
+
+</html>
